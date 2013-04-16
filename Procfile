@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath=photoplanet wsgi.py
+web: gunicorn --pythonpath=photoplanet photoplanet.wsgi
