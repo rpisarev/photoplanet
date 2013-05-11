@@ -20,3 +20,8 @@ urlpatterns = patterns('',
     url(r'^all/', TemplateView.as_view(template_name="photoplanet/all.html"), name='all'),
     url(r'^feedback/', include('feedback.urls')),
 )
+urlpatterns += patterns(
+        '',
+        url(r'^(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': settings.MEDIA_ROOT}),
+    )
