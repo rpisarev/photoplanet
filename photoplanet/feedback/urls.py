@@ -3,5 +3,5 @@ from feedback.views import FBackView
 
 
 urlpatterns = patterns('',
-    url(r'^$', FBackView.as_view(), name = 'feedback'),
-)
+                       url(r'^$', FBackView.as_view(), name='feedback'),
+                       )   # It's good?!

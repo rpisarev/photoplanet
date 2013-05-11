@@ -4,6 +4,7 @@ import datetime
 
 register = template.Library()
 
+
 class ServerTime(template.Node):
 
     def __init__(self):

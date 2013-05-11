@@ -8,20 +8,12 @@ from django.conf import settings
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    url(r'^$', 'photoplanet.views.home', name='home'),
-    # url(r'^photoplanet/', include('photoplanet.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
-    url(r'^all/', TemplateView.as_view(template_name="photoplanet/all.html"), name='all'),
-    url(r'^feedback/', include('feedback.urls')),
-)
-urlpatterns += patterns(
-        '',
-        url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
-            {'document_root': settings.STATIC_ROOT}),
-    )
+                       # Examples:
+                       url(r'^$', 'photoplanet.views.home', name='home'),
+                       url(r'^all/', TemplateView.as_view(template_name="photoplanet/all.html"), name='all'),
+                       url(r'^feedback/', include('feedback.urls')),
+                       )
+urlpatterns += patterns('',
+                        url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
+                        {'document_root': settings.STATIC_ROOT}),
+                        )
