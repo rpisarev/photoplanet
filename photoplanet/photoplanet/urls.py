@@ -7,13 +7,18 @@ from django.conf import settings
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
-                       # Examples:
-                       url(r'^$', 'photoplanet.views.home', name='home'),
-                       url(r'^all/', TemplateView.as_view(template_name="photoplanet/all.html"), name='all'),
-                       url(r'^feedback/', include('feedback.urls')),
-                       )
-urlpatterns += patterns('',
-                        url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
-                        {'document_root': settings.STATIC_ROOT}),
-                        )
+urlpatterns = patterns(
+    '',
+    url(r'^$', 'photoplanet.views.home', name='home'),
+    url(
+        r'^all/', TemplateView.as_view(
+            template_name="photoplanet/all.html"
+        ), name='all'
+    ),
+    url(r'^feedback/', include('feedback.urls')),
+)
+urlpatterns += patterns(
+    '',
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
+    {'document_root': settings.STATIC_ROOT}),
+)
