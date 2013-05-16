@@ -13,4 +13,5 @@ pyflakes==0.7.2
 python-instagram==0.8.0
 python-openid==2.2.5
 simplejson==3.3.0
+psycopg2==2.5
 wsgiref==0.1.2
