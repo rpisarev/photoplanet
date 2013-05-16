@@ -1,0 +1,4 @@
+*.pyc
+photoplanet/photoplanet/settings/instagram.py
+photoplanet/photoplanet.db
+
