@@ -22,6 +22,7 @@ def server_datetime(parser, token):
 
 INSTAGRAM_USER_URL_TEMPLATE = 'http://instagram.com/{}'
 
+
 @register.simple_tag
 def instagram_url(username):
     return INSTAGRAM_USER_URL_TEMPLATE.format(username)

@@ -11,8 +11,10 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = patterns(
     '',
     url(r'^$', 'photoplanet.views.home', name='home'),
-    url(r'^load_photos/$', 'photoplanet.views.load_photos', 
-       name='load_photos'),
+    url(
+        r'^load_photos/$', 'photoplanet.views.load_photos',
+        name='load_photos'
+    ),
     url(r'^all/$', 'photoplanet.views.all', name='all'),
     url(r'^feedback/', include('feedback.urls')),
     url(r'', include('social_auth.urls')),
