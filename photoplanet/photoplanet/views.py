@@ -24,6 +24,9 @@ def home(request):
 
 
 def all(request):
+    """
+    With pagination like: http://127.0.0.1:8000/all/?page=2 or http://rpisarev-photoplanet.herokuapp.com/all/?page=2
+    """
     photos = Photo.objects.order_by('-created_time').all()
     paginator = Paginator(photos, PHOTOS_PER_PAGE)
     page = request.GET.get('page')
