@@ -19,3 +19,9 @@ class ServerTime(template.Node):
 def server_datetime(parser, token):
 #    tag_name, format_string = token.split_contents()
     return ServerTime()
+
+INSTAGRAM_USER_URL_TEMPLATE = 'http://instagram.com/{}'
+
+@register.simple_tag
+def instagram_url(username):
+    return INSTAGRAM_USER_URL_TEMPLATE.format(username)
