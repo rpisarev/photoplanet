@@ -16,7 +16,7 @@ urlpatterns = patterns(
     url(r'^all/$', 'photoplanet.views.all', name='all'),
     url(r'^feedback/', include('feedback.urls')),
     url(r'', include('social_auth.urls')),
-    # url(r'', include('users.urls')),
+    url(r'', include('users.urls')),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {
         'next_page': '/'
         }, name='logout'),
