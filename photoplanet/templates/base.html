@@ -1,5 +1,4 @@
 {% load staticfiles %}
-{% load servertime %}
 <!DOCTYPE html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
@@ -31,7 +30,11 @@
          <li><a href="day.html" class="button">Today</a></li>
          <li><a href="{% url 'all' %}" class="button">All</a></li>
          <li><a href="about.html" class="button">About</a></li>
-         <li><a href="login.html" class="button">Login</a></li>
+         {% if user.is_authenticated %}
+         <li><a href="{% url 'logout' %}" class="button">Logout</a></li>
+         {% else %}
+         <li><a href="{% url 'login' %}" class="button">Login</a></li>
+         {% endif %}
         </ul>
       </div>
       <h1>
@@ -60,8 +63,13 @@
 
       <div class="panel">
         <h5>Sidebar</h5>
-        <p>Some information may go here.</p>
-        <a href="#">Read More &rarr;</a>
+        <p>
+        {% if user.username %}
+        Logged in as {{ user.username }}.
+        {% else %}
+        Not logged in.
+        {% endif %}
+        </p>
       </div>
 
     </aside>
@@ -79,14 +87,18 @@
       <hr />
       <div class="row">
         <div class="large-6 columns">
-          <p>&copy; Copyright no one at all. Go to town. {% server_time %}</p>
+          <p>&copy; Copyright no one at all. Go to town.</p>
         </div>
         <div class="large-6 columns">
           <ul class="inline-list right">
             <li><a href="day.html">Today</a></li>
             <li><a href="all.html">All</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="login.html">Login</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
           </ul>
         </div>
       </div>
@@ -106,3 +118,4 @@
   <!-- End Footer -->
 </body>
 </html>
+
