@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from django.views.generic import TemplateView
+#from django.views.generic import TemplateView
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -11,13 +11,17 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = patterns(
     '',
     url(r'^$', 'photoplanet.views.home', name='home'),
-    url(
-        r'^all/', TemplateView.as_view(
-            template_name="photoplanet/all.html"
-        ), name='all'
-    ),
+    url(r'^load_photos/$', 'photoplanet.views.load_photos', 
+       name='load_photos'),
+    url(r'^all/$', 'photoplanet.views.all', name='all'),
     url(r'^feedback/', include('feedback.urls')),
+    url(r'', include('social_auth.urls')),
+    # url(r'', include('users.urls')),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {
+        'next_page': '/'
+        }, name='logout'),
 )
+
 urlpatterns += patterns(
     '',
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
