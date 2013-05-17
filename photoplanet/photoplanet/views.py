@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.conf import settings
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from datetime import date
 from .models import Photo
@@ -24,6 +25,14 @@ def home(request):
 
 def all(request):
     photos = Photo.objects.order_by('-created_time').all()
+    paginator = Paginator(photos, PHOTOS_PER_PAGE)
+    page = request.GET.get('page')
+    try:
+        photos = paginator.page(page)
+    except PageNotAnInteger:
+        photos = paginator.page(1)
+    except EmptyPage:
+        photos = paginator.page(paginator.num_pages)
     return render(request, 'photoplanet/all.html', {'photos': photos})
 
 
