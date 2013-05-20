@@ -7,10 +7,6 @@ from .models import Feedback
 from .forms import FeedbackForm
 
 
-class FBackView(TemplateView):
-    template_name = 'feedback/fb.html'
-
-
 class FeedbackCreateView(LoginRequiredMixin, CreateView):
     model = Feedback
     form_class = FeedbackForm
