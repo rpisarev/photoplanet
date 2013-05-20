@@ -25,24 +25,6 @@ class HomePhotoListView(ListView):
     context_object_name = 'photo_list'
 
 
-def all(request):
-    """
-    With pagination like: http://127.0.0.1:8000/all/?page=2
-    or
-    http://rpisarev-photoplanet.herokuapp.com/all/?page=2
-    """
-    photos = Photo.objects.order_by('-created_time').all()
-    paginator = Paginator(photos, PHOTOS_PER_PAGE)
-    page = request.GET.get('page')
-    try:
-        photos = paginator.page(page)
-    except PageNotAnInteger:
-        photos = paginator.page(1)
-    except EmptyPage:
-        photos = paginator.page(paginator.num_pages)
-    return render(request, 'photoplanet/all.html', {'photos': photos})
-
-
 class AllPhotoListView(ListView):
     model = Photo
     template_name = 'photoplanet/all.html'
