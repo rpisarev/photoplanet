@@ -1,7 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
 from django.conf import settings
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
 
 from datetime import date
