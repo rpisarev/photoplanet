@@ -11,3 +11,6 @@ class Photo(models.Model):
     photo_url = models.URLField(null=True)
     created_time = models.DateTimeField(null=True)
     like_count = models.IntegerField(null=True)
+
+    def __unicode__ (self):
+        return return 'Photo by {name}'.format(name=self.username)
