@@ -13,4 +13,4 @@ class Photo(models.Model):
     like_count = models.IntegerField(null=True)
 
     def __unicode__ (self):
-        return return 'Photo by {name}'.format(name=self.username)
+        return 'Photo by {name}'.format(name=self.username)
