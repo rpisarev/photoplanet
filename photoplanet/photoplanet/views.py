@@ -16,16 +16,9 @@ MEDIA_TAG = 'donetsk'
 PHOTOS_PER_PAGE = 10
 
 
-def home(request):
-    photos = Photo.objects.filter(
-        created_time__gte=date.today()).order_by(
-            '-like_count'
-        )[:PHOTOS_PER_PAGE]
-    return render(request, 'photoplanet/all.html', {'photos': photos})
-
 class HomePhotoListView(ListView):
     model = Photo
-    template_name = 'photoplanet/all'
+    template_name = 'photoplanet/all.html'
     queryset = Photo.objects.filter(
         created_time__gte=date.today()).\
         order_by('-like_count')[:PHOTOS_PER_PAGE]
