@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.conf import settings
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from datetime import date
 from .models import Photo
@@ -30,6 +30,10 @@ class AllPhotoListView(ListView):
     context_object_name = 'photo_list'
     paginate_by = 10
     queryset = Photo.objects.order_by('-created_time').all()
+
+
+class PhotoDetailView(DetailView):
+    model = Photo
 
 
 def load_photos(request):
