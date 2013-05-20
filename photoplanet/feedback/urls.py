@@ -1,8 +1,8 @@
 from django.conf.urls import patterns, url
-from feedback.views import FBackView
+from feedback.views import FeedbackCreateView
 
 
 urlpatterns = patterns(
     '',
-    url(r'^$', FBackView.as_view(), name='feedback'),
+    url(r'^$', FeedbackCreateView.as_view(), name='feedback'),
 )
