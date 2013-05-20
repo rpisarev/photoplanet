@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import ListView
 
 from datetime import date
 from .models import Photo
@@ -21,6 +22,14 @@ def home(request):
             '-like_count'
         )[:PHOTOS_PER_PAGE]
     return render(request, 'photoplanet/all.html', {'photos': photos})
+
+class HomePhotoListView(ListView):
+    model = Photo
+    template_name = 'photoplanet/all'
+    queryset = Photo.objects.filter(
+        created_time__gte=date.today()).\
+        order_by('-like_count')[:PHOTOS_PER_PAGE]
+    context_object_name = 'photo_list'
 
 
 def all(request):
