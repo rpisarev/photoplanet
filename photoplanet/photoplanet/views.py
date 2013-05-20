@@ -21,8 +21,9 @@ class HomePhotoListView(ListView):
     template_name = 'photoplanet/all.html'
     queryset = Photo.objects.filter(
         created_time__gte=date.today()).\
-        order_by('-like_count')[:PHOTOS_PER_PAGE]
+        order_by('-like_count')
     context_object_name = 'photo_list'
+    paginate_by = 10
 
 
 class AllPhotoListView(ListView):
