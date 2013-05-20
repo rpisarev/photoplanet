@@ -3,6 +3,8 @@ from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+from .views import HomePhotoListView, AllPhotoListView, PhotoDetailView
+
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -10,12 +12,13 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = patterns(
     '',
-    url(r'^$', 'photoplanet.views.home', name='home'),
+    url(r'^$', HomePhotoListView.as_view(), name='home'),
     url(
         r'^load_photos/$', 'photoplanet.views.load_photos',
         name='load_photos'
     ),
-    url(r'^all/$', 'photoplanet.views.all', name='all'),
+    url(r'^all/$', AllPhotoListView.as_view(), name='all'),
+    url(r'^photo/(?P<pk>\w+)$', PhotoDetailView.as_view(), name='photo-detail'),
     url(r'^feedback/', include('feedback.urls')),
     url(r'', include('social_auth.urls')),
     url(r'', include('users.urls')),
