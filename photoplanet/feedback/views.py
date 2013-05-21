@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import CreateView
 from django.core.urlresolvers import reverse_lazy
 
 from braces.views import LoginRequiredMixin
