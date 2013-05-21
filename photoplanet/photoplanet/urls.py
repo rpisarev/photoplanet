@@ -18,7 +18,11 @@ urlpatterns = patterns(
         name='load_photos'
     ),
     url(r'^all/$', AllPhotoListView.as_view(), name='all'),
-    url(r'^photo/(?P<pk>\w+)$', PhotoDetailView.as_view(), name='photo-detail'),
+    url(
+        r'^photo/(?P<pk>\w+)$',
+        PhotoDetailView.as_view(),
+        name='photo-detail'
+    ),
     url(r'^feedback/', include('feedback.urls')),
     url(r'', include('social_auth.urls')),
     url(r'', include('users.urls')),
