@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 #from django.views.generic import TemplateView
 from django.conf import settings
+from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from .views import HomePhotoListView, AllPhotoListView, PhotoDetailView
@@ -8,7 +9,7 @@ from .views import HomePhotoListView, AllPhotoListView, PhotoDetailView
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
-# admin.autodiscover()
+admin.autodiscover()
 
 urlpatterns = patterns(
     '',
@@ -29,6 +30,7 @@ urlpatterns = patterns(
     url(r'^logout/$', 'django.contrib.auth.views.logout', {
         'next_page': '/'
         }, name='logout'),
+    url(r'^input/', include(admin.site.urls)),
 )
 
 urlpatterns += patterns(
