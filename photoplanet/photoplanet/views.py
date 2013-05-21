@@ -1,7 +1,6 @@
 from django.http import HttpResponse
-from django.shortcuts import render
 from django.conf import settings
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import ListView, DetailView
 
 from datetime import date
 from .models import Photo
@@ -15,28 +14,26 @@ MEDIA_TAG = 'donetsk'
 PHOTOS_PER_PAGE = 10
 
 
-def home(request):
-    photos = Photo.objects.filter(
-        created_time__gte=date.today()).order_by(
-            '-like_count'
-        )[:PHOTOS_PER_PAGE]
-    return render(request, 'photoplanet/all.html', {'photos': photos})
+class HomePhotoListView(ListView):
+    model = Photo
+    template_name = 'photoplanet/all.html'
+    queryset = Photo.objects.filter(
+        created_time__gte=date.today()).\
+        order_by('-like_count')
+    context_object_name = 'photo_list'
+    paginate_by = 10
 
 
-def all(request):
-    """
-    With pagination like: http://127.0.0.1:8000/all/?page=2 or http://rpisarev-photoplanet.herokuapp.com/all/?page=2
-    """
-    photos = Photo.objects.order_by('-created_time').all()
-    paginator = Paginator(photos, PHOTOS_PER_PAGE)
-    page = request.GET.get('page')
-    try:
-        photos = paginator.page(page)
-    except PageNotAnInteger:
-        photos = paginator.page(1)
-    except EmptyPage:
-        photos = paginator.page(paginator.num_pages)
-    return render(request, 'photoplanet/all.html', {'photos': photos})
+class AllPhotoListView(ListView):
+    model = Photo
+    template_name = 'photoplanet/all.html'
+    context_object_name = 'photo_list'
+    paginate_by = 10
+    queryset = Photo.objects.order_by('-created_time').all()
+
+
+class PhotoDetailView(DetailView):
+    model = Photo
 
 
 def load_photos(request):

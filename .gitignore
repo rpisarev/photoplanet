@@ -1,4 +1,5 @@
 *.pyc
 photoplanet/photoplanet/settings/instagram.py
+photoplanet/photoplanet/settings/google.py
 photoplanet/photoplanet.db
 
