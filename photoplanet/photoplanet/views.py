@@ -47,6 +47,10 @@ class PhotoPerDayArchiveView(DayArchiveView):
     allow_empty = True
     paginate_by = 10
 
+class AboutListView(ListView):
+    template_name = 'photoplanet/about.html'
+    model = Photo
+
 def load_photos(request):
     """
     Loads photos from Insagram (not yet other,like G+) and insert in database.

@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from .views import HomePhotoListView, AllPhotoListView, PhotoDetailView, PhotoPerDayArchiveView
+from .views import HomePhotoListView, AllPhotoListView, PhotoDetailView, PhotoPerDayArchiveView, AboutListView
 
 
 # Uncomment the next two lines to enable the admin:
@@ -19,6 +19,7 @@ urlpatterns = patterns(
         name='load_photos'
     ),
     url(r'^all/$', AllPhotoListView.as_view(), name='all'),
+    url(r'^about/$', AboutListView.as_view(), name='all'),
     url(r'^(?P<year>\d{4})/(?P<month>\d+)/(?P<day>\d+)/$',
         PhotoPerDayArchiveView.as_view(),
         name="photo-date-view"),
