@@ -1,8 +1,10 @@
 from django.http import HttpResponse
 from django.conf import settings
 from django.views.generic import ListView, DetailView
+from django.views.generic.dates import DayArchiveView
 
 from datetime import date
+
 from .models import Photo
 
 from instagram.client import InstagramAPI
@@ -35,6 +37,15 @@ class AllPhotoListView(ListView):
 class PhotoDetailView(DetailView):
     model = Photo
 
+class PhotoPerDayArchiveView(DayArchiveView):
+    model = Photo
+    template_name = 'photoplanet/photo_day.html'
+    queryset = Photo.objects.order_by('-like_count').all()
+    date_field = "created_time"
+    month_format = '%m'
+    make_object_list = True
+    allow_empty = True
+    paginate_by = 10
 
 def load_photos(request):
     """
