@@ -28,7 +28,7 @@ urlpatterns = patterns(
         PhotoDetailView.as_view(),
         name='photo-detail'
     ),
-    url(r'^photo_vote/$', 'vote', name='photo-vote'),
+    url(r'^photo_vote/$', 'photoplanet.views.vote', name='photo-vote'),
     url(r'^feedback/', include('feedback.urls')),
     url(r'', include('social_auth.urls')),
     url(r'', include('users.urls')),
