@@ -8,6 +8,12 @@
   <link rel="stylesheet" href="{% static "css/index.css" %}">
 {% endblock css %}
 
+{% block js %} {{ block.super }}
+  <script src="{% static "js/vote.js" %}"></script>
+  <script type="text/javascript">
+        window.PHOTO.vote_url = "{% url 'photo-vote' %}";
+  </script>
+{% endblock js %}
 
 {% block content %}
     <div class="large-9 columns" role="content">
@@ -27,8 +33,12 @@
             <div class="time"><a href="{% url 'photo-detail' p.pk %}"> 
                 {{ p.created_time }}
               </a>
-            likes: {{ p.like_count }}
+            likes: {{ p.like_count }}, votes: <span class="js-vote-{{ p.id }}">{{ p.vote_count }}</span>
             </div>
+	    <div class="voting">
+                          <a href="#" class="js-vote" data-vote="1" data-id="{{ p.pk }}">up</a> |
+                          <a href="#" class="js-vote" data-vote="-1" data-id="{{ p.pk }}">down</a>
+             </div>
           </div>
         </div>
 

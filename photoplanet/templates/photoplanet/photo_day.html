@@ -2,6 +2,9 @@
 {% load staticfiles %}
 {% load servertime %}
 
+{% block js %} {{ block.super }}
+  <script src="{% static "js/vote.js" %}"></script>
+{% endblock js %}
 
 {% block content %}
     <div class="large-9 columns" role="content">
