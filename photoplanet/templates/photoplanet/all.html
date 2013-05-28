@@ -33,7 +33,7 @@
             <div class="time"><a href="{% url 'photo-detail' p.pk %}"> 
                 {{ p.created_time }}
               </a>
-            likes: {{ p.like_count }}, votes: <span class="js-vote-{{ p.id }}">{{ p.vote_count }}</span>
+            likes: {{ p.like_count }}, votes: <span class="js-vote-{{ p.pk }}">{{ p.vote_count }}</span>
             </div>
 	    <div class="voting">
                           <a href="#" class="js-vote" data-vote="1" data-id="{{ p.pk }}">up</a> |
