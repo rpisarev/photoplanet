@@ -7,8 +7,7 @@ from django.views.decorators.http import require_POST
 
 from datetime import date
 
-from .models import Photo
-from .forms import VoteForm
+from .models import Photo, Vote
 
 from instagram.client import InstagramAPI
 
@@ -94,18 +93,10 @@ def load_photos(request):
     return HttpResponse(html)
 
 
-@require_POST
-@ajax_request
+#@require_POST
+#@ajax_request
 def vote(request):
-    form = VoteForm(request.user, request.POST)
-    if form.is_valid():
-        form.save()
-        return {
-            'success': True,
-            'votes': form.instance.photo.vote_count,
-        }
-    else:
-        return {
-            'success': False,
-            'error': form.errors,
+#    print request.POST['vote']
+    return {
+            'votes': request.POST['vote'],
         }
