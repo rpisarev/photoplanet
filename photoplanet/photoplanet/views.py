@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.dates import DayArchiveView
 from annoying.decorators import ajax_request
 from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_protect
 
 from datetime import date
 
@@ -93,8 +94,9 @@ def load_photos(request):
     return HttpResponse(html)
 
 
-#@require_POST
-#@ajax_request
+@require_POST
+@ajax_request
+@csrf_protect
 def vote(request):
 #    print request.POST['vote']
     return {
