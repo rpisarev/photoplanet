@@ -27,12 +27,26 @@ class Vote(models.Model):
     photo = models.ForeignKey(Photo)
     rating = models.IntegerField()
 
-    def save(self, *args, **kwargs):
-        super(Vote, self).save(*args, **kwargs)
+    def save(self):
+        """
+        Allow only one vote per user per photo.
+
+        Change old vote in database if the same user submits
+        another vote for the same photo.
+        """
+
+        other_votes = Vote.objects.filter(user=self.user, photo=self.photo).all()
+        if other_votes and not other_votes[0].pk == self.pk:
+            vote = other_votes[0]
+            vote.vote_value = self.vote_value
+            vote.save()
+        else:
+            super(Vote, self).save()
+
+        # update vote count for a photo
         photo = self.photo
-        photo.vote_count = \
-            Vote.objects.filter(photo=photo).aggregate(
-                vote_count=models.Sum('vote_value'))['vote_count']
+        photo.vote_count = Vote.objects.filter(photo=photo).aggregate(
+            vote_count=models.Sum('vote_value'))['vote_count']
         photo.save()
 
     def __unicode__(self):
