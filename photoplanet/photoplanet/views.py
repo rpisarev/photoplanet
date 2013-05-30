@@ -98,7 +98,7 @@ def load_photos(request):
 @ajax_request
 @csrf_protect
 def vote(request):
-#    print request.POST['vote']
+    """View for AJAX voting"""
     return {
             'votes': request.POST['vote'],
         }
