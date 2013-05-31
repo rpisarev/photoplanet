@@ -1,9 +1,14 @@
 from django.http import HttpResponse
 from django.conf import settings
 from django.views.generic import ListView, DetailView
+from django.views.generic.dates import DayArchiveView
+from annoying.decorators import ajax_request
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_protect
 
 from datetime import date
-from .models import Photo
+
+from .models import Photo, Vote
 
 from instagram.client import InstagramAPI
 
@@ -35,6 +40,19 @@ class AllPhotoListView(ListView):
 class PhotoDetailView(DetailView):
     model = Photo
 
+class PhotoPerDayArchiveView(DayArchiveView):
+    model = Photo
+    template_name = 'photoplanet/photo_day.html'
+    queryset = Photo.objects.order_by('-like_count').all()
+    date_field = "created_time"
+    month_format = '%m'
+    make_object_list = True
+    allow_empty = True
+    paginate_by = 10
+
+class AboutListView(ListView):
+    template_name = 'photoplanet/about.html'
+    model = Photo
 
 def load_photos(request):
     """
@@ -74,3 +92,37 @@ def load_photos(request):
 
     html = "<html><body><ul>{}</ul></body></html>".format(info_photo)
     return HttpResponse(html)
+
+
+@require_POST
+@ajax_request
+@csrf_protect
+def vote(request):
+    """View for AJAX voting"""
+    user = request.user
+    photo_id = request.POST['photo']
+    photo = Photo.objects.get(photo_id=photo_id)
+    if user.is_authenticated():
+        vote_type = request.POST['vote']
+        if '-1' in vote_type:
+            vote_value = -1
+        elif '+1' in vote_type:
+            vote_value = 1
+        elif '1' in vote_type:
+            vote_value = 1
+        else:
+            vote_value = 0
+        vote_obj = Vote(user=user, photo=photo, rating=vote_value)
+        vote_obj.save()
+        photo = Photo.objects.get(photo_id=photo_id)
+        context_dict = {
+            'votes': photo.vote_count,
+            'message': 'Vote is updated.',
+        }
+
+    else:
+        context_dict = {
+                'message': 'You must be logged in to vote.',
+        }
+    #return HttpResponse(json.dumps(context_dict), content_type="application/json")
+    return context_dict
