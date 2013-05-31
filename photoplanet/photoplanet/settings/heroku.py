@@ -4,7 +4,7 @@ import dj_database_url
 
 from base import *
 
-
+DEBUG = False
 # https://devcenter.heroku.com/articles/django#django-settings
 
 # Parse database configuration from $DATABASE_URL
