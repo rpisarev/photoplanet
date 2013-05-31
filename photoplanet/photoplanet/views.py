@@ -99,6 +99,30 @@ def load_photos(request):
 @csrf_protect
 def vote(request):
     """View for AJAX voting"""
-    return {
-            'votes': request.POST['vote'],
+    user = request.user
+    photo_id = request.POST['photo']
+    photo = Photo.objects.get(photo_id=photo_id)
+    if user.is_authenticated():
+        vote_type = request.POST['vote']
+        if '-1' in vote_type:
+            vote_value = -1
+        elif '+1' in vote_type:
+            vote_value = 1
+        elif '1' in vote_type:
+            vote_value = 1
+        else:
+            vote_value = 0
+        vote_obj = Vote(user=user, photo=photo, rating=vote_value)
+        vote_obj.save()
+        photo = Photo.objects.get(photo_id=photo_id)
+        context_dict = {
+            'votes': photo.vote_count,
+            'message': 'Vote is updated.',
         }
+
+    else:
+        context_dict = {
+                'message': 'You must be logged in to vote.',
+        }
+    #return HttpResponse(json.dumps(context_dict), content_type="application/json")
+    return context_dict

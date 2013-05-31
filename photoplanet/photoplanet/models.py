@@ -38,7 +38,7 @@ class Vote(models.Model):
         other_votes = Vote.objects.filter(user=self.user, photo=self.photo).all()
         if other_votes and not other_votes[0].pk == self.pk:
             vote = other_votes[0]
-            vote.vote_value = self.vote_value
+            vote.rating = self.rating
             vote.save()
         else:
             super(Vote, self).save()
@@ -46,7 +46,7 @@ class Vote(models.Model):
         # update vote count for a photo
         photo = self.photo
         photo.vote_count = Vote.objects.filter(photo=photo).aggregate(
-            vote_count=models.Sum('vote_value'))['vote_count']
+            vote_count=models.Sum('rating'))['vote_count']
         photo.save()
 
     def __unicode__(self):
