@@ -27,20 +27,20 @@ class Command(BaseCommand):
         info = ''
         # list of media is in the first element of the tuple
         for m in search_result[0]:
-            p, is_created = Photo.objects.get_or_create(
-                id=m.id, username=m.user.username)
+            photo, is_created = Photo.objects.get_or_create(
+                photo_id=m.id, username=m.user.username)
             is_like_count_updated = False
-            if not p.like_count == m.like_count:
-                p.username = m.user.username
-                p.user_avatar_url = m.user.profile_picture
-                p.photo_url = m.images['standard_resolution'].url
-                p.created_time = m.created_time.replace(tzinfo=utc)
-                p.like_count = m.like_count
-                p.save()
+            if not photo.like_count == m.like_count:
+                photo.username = m.user.username
+                photo.user_avatar_url = m.user.profile_picture
+                photo.photo_url = m.images['standard_resolution'].url
+                photo.created_time = m.created_time.replace(tzinfo=utc)
+                photo.like_count = m.like_count
+                photo.save()
                 is_like_count_updated = True
             info = ''
-            info += '{id}\n{username}\n{avatar_url}\n{photo_url}\n'.format(
-                id=m.id,
+            info += '{photo_id}\n{username}\n{avatar_url}\n{photo_url}\n'.format(
+                photo_id=m.id,
                 username=m.user.username,
                 avatar_url=m.user.profile_picture,
                 photo_url=m.images['standard_resolution'].url
