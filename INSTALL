@@ -1,0 +1,7 @@
+1. Install virtualenvwrapper.
+2. Install pip.
+3. mkvirtualenv rpisarev
+4. pip install from requirements.txt (without - https://github.com/rpisarev/photoplanet/blob/c20fc99b.. - this requirement for posqress for Heroku)
+5. Run 'make runserver' (Instagram's and Google key - create )
+6. Type in browser 127.0.0.1:8000/load_photos/
+7. Use application
