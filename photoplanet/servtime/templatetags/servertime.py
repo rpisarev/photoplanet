@@ -1,4 +1,6 @@
 from django import template
+from django.core.urlresolvers import reverse
+
 import datetime
 
 
@@ -26,3 +28,8 @@ INSTAGRAM_USER_URL_TEMPLATE = 'http://instagram.com/{}'
 @register.simple_tag
 def instagram_url(username):
     return INSTAGRAM_USER_URL_TEMPLATE.format(username)
+
+@register.simple_tag
+def url_for_today():
+    d = datetime.date.today()
+    return reverse('photo-date-view', kwargs={'year': d.year, 'month': d.month, 'day': d.day})

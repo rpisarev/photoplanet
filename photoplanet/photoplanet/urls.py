@@ -16,10 +16,10 @@ urlpatterns = patterns(
     url(r'^$', HomePhotoListView.as_view(), name='home'),
     url(
         r'^load_photos/$', 'photoplanet.views.load_photos',
-        name='load_photos'
+        name='load-photos'
     ),
     url(r'^all/$', AllPhotoListView.as_view(), name='all'),
-    url(r'^about/$', AboutListView.as_view(), name='all'),
+    url(r'^about/$', AboutListView.as_view(), name='about'),
     url(r'^(?P<year>\d{4})/(?P<month>\d+)/(?P<day>\d+)/$',
         PhotoPerDayArchiveView.as_view(),
         name="photo-date-view"),
