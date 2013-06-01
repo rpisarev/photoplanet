@@ -4,7 +4,8 @@ from django.conf import settings
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from .views import HomePhotoListView, AllPhotoListView, PhotoDetailView, PhotoPerDayArchiveView, AboutListView
+from .views import HomePhotoListView, AllPhotoListView, PhotoDetailView
+from .views import PhotoPerDayArchiveView, AboutListView
 
 
 # Uncomment the next two lines to enable the admin:
