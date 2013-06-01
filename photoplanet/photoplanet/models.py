@@ -13,6 +13,7 @@ class Photo(models.Model):
     created_time = models.DateTimeField(null=True)
     like_count = models.IntegerField(null=True)
     vote_count = models.IntegerField(default=0)
+    is_spam = models.BooleanField(default=False)
 
     def __unicode__ (self):
         return 'Photo by {name}'.format(name=self.username)
