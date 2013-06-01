@@ -127,5 +127,4 @@ def vote(request):
         context_dict = {
             'message': 'You must be logged in to vote.',
         }
-    #return HttpResponse(json.dumps(context_dict), content_type="application/json")
     return context_dict
