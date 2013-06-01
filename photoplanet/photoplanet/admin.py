@@ -14,7 +14,7 @@ class PhotoAdmin(admin.ModelAdmin):
         'vote_count',
         'is_spam'
     )
-    readonly_fields = ['created_time', 'like_count',]
+    readonly_fields = ['created_time', 'like_count']
     search_fields = ['name']
 
 admin.site.register(Photo, PhotoAdmin)

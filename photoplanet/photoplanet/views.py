@@ -40,6 +40,7 @@ class AllPhotoListView(ListView):
 class PhotoDetailView(DetailView):
     model = Photo
 
+
 class PhotoPerDayArchiveView(DayArchiveView):
     model = Photo
     template_name = 'photoplanet/photo_day.html'
@@ -50,9 +51,11 @@ class PhotoPerDayArchiveView(DayArchiveView):
     allow_empty = True
     paginate_by = 10
 
+
 class AboutListView(ListView):
     template_name = 'photoplanet/about.html'
     model = Photo
+
 
 def load_photos(request):
     """
@@ -122,7 +125,7 @@ def vote(request):
 
     else:
         context_dict = {
-                'message': 'You must be logged in to vote.',
+            'message': 'You must be logged in to vote.',
         }
     #return HttpResponse(json.dumps(context_dict), content_type="application/json")
     return context_dict

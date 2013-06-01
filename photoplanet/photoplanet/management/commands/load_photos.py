@@ -23,7 +23,9 @@ class Command(BaseCommand):
         api = InstagramAPI(
             client_id=settings.INSTAGRAM_CLIENT_ID,
             client_secret=settings.INSTAGRAM_CLIENT_SECRET)
-        search_result = api.tag_recent_media(MEDIA_COUNT, LARGE_MEDIA_MAX_ID, MEDIA_TAG)
+        search_result = api.tag_recent_media(
+            MEDIA_COUNT, LARGE_MEDIA_MAX_ID, MEDIA_TAG
+        )
         info = ''
         # list of media is in the first element of the tuple
         for m in search_result[0]:
@@ -39,17 +41,17 @@ class Command(BaseCommand):
                 photo.save()
                 is_like_count_updated = True
             info = ''
-            info += '{photo_id}\n{username}\n{avatar_url}\n{photo_url}\n'.format(
-                photo_id=m.id,
+            info += '{id}\n{username}\n{avatar_url}\n{photo_url}\n'.format(
+                id=m.id,
                 username=m.user.username,
                 avatar_url=m.user.profile_picture,
                 photo_url=m.images['standard_resolution'].url
             )
-            info += '{created_time}\n{like_count}\n{is_created}\n{is_like_count_updated}\n'.format(
-                created_time=m.created_time,
-                like_count=m.like_count,
+            info += '{created}\n{like}\n{is_created}\n{is_updated}\n'.format(
+                created=m.created_time,
+                like=m.like_count,
                 is_created=is_created,
-                is_like_count_updated=is_like_count_updated
+                is_updated=is_like_count_updated
             )
             info += 40 * '-'
             self.stdout.write(info)
