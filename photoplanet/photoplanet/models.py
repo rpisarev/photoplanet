@@ -13,8 +13,9 @@ class Photo(models.Model):
     created_time = models.DateTimeField(null=True)
     like_count = models.IntegerField(null=True)
     vote_count = models.IntegerField(default=0)
+    is_spam = models.BooleanField(default=False)
 
-    def __unicode__ (self):
+    def __unicode__(self):
         return 'Photo by {name}'.format(name=self.username)
 
 
@@ -35,7 +36,9 @@ class Vote(models.Model):
         another vote for the same photo.
         """
 
-        other_votes = Vote.objects.filter(user=self.user, photo=self.photo).all()
+        other_votes = Vote.objects.filter(
+            user=self.user, photo=self.photo
+        ).all()
         if other_votes and not other_votes[0].pk == self.pk:
             vote = other_votes[0]
             vote.rating = self.rating
@@ -50,4 +53,6 @@ class Vote(models.Model):
         photo.save()
 
     def __unicode__(self):
-        return "{rating} from {user}".format(rating=self.rating, user=self.user)
+        return "{rating} from {user}".format(
+            rating=self.rating, user=self.user
+        )
