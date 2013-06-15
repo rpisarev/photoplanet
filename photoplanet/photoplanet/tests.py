@@ -40,5 +40,7 @@ class PhotosTest(TestCase):
         """
         Tests that +2 is in the all photos view.
         """
+        photo = PhotoFactory.create()
+        photo.save()
         response = self.client.get(self.all_url)
         self.assertTrue('+2' in response.content)
