@@ -47,10 +47,10 @@ class Vote(models.Model):
             super(Vote, self).save()
 
         # update vote count for a photo
-        photo = self.photo
-        photo.vote_count = Vote.objects.filter(photo=photo).aggregate(
+        Photo.objects.filter(photo_id=self.photo_id).update(
+            vote_count=Vote.objects.filter(photo=self.photo).aggregate(
             vote_count=models.Sum('rating'))['vote_count']
-        photo.save()
+        )
 
     def __unicode__(self):
         return "{rating} from {user}".format(
