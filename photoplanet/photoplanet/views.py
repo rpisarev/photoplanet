@@ -128,6 +128,10 @@ def vote(request):
             vote_value = 1
         elif '1' in vote_type:
             vote_value = 1
+        elif '+2' in vote_type:
+            vote_value = 2
+        elif '2' in vote_type:
+            vote_value = 2
         else:
             vote_value = 0
         vote_obj = Vote(user=user, photo=photo, rating=vote_value)
