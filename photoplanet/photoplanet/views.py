@@ -24,7 +24,7 @@ class HomePhotoListView(ListView):
     template_name = 'photoplanet/all.html'
     queryset = Photo.objects.filter(
         created_time__gte=date.today()).\
-        order_by('-like_count')
+        order_by('-vote_count', '-like_count').all()
     context_object_name = 'photo_list'
     paginate_by = 10
 
@@ -44,7 +44,7 @@ class PhotoDetailView(DetailView):
 class PhotoPerDayArchiveView(DayArchiveView):
     model = Photo
     template_name = 'photoplanet/photo_day.html'
-    queryset = Photo.objects.order_by('-like_count').all()
+    queryset = Photo.objects.order_by('-vote_count', '-like_count').all()
     date_field = "created_time"
     month_format = '%m'
     make_object_list = True
