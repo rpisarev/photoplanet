@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from .views import HomePhotoListView, AllPhotoListView, PhotoDetailView
-from .views import PhotoPerDayArchiveView, AboutListView
+from .views import PhotoPerDayArchiveView, AboutListView, VotePhotosListView
 
 
 # Uncomment the next two lines to enable the admin:
@@ -29,6 +29,7 @@ urlpatterns = patterns(
         PhotoDetailView.as_view(),
         name='photo-detail'
     ),
+    url(r'^vote/$', VotePhotosListView.as_view(), name='vote'),
     url(r'^photo_vote/$', 'photoplanet.views.vote', name='photo-vote'),
     url(r'^feedback/', include('feedback.urls')),
     url(r'', include('social_auth.urls')),
