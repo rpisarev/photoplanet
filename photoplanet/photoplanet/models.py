@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Photo(models.Model):
     """
-    Model for Photo datail
+    Model for Photo detail
     """
     photo_id = models.CharField(primary_key=True, max_length=100)
     username = models.CharField(max_length=100)
