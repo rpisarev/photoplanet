@@ -1,6 +1,5 @@
 from base import *
-from instagram import *
-from google import *
+from keys import *
 
 MIDDLEWARE_CLASSES += (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
