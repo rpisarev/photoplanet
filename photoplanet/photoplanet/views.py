@@ -45,7 +45,10 @@ class VotePhotosListView(LoginRequiredMixin, AllPhotoListView):
     def get_queryset(self):
         return Photo.objects.exclude(
             photo_id__in=Vote.objects.filter(
-                user_id=self.request.user.id).values_list('photo_id', flat=True)
+                user_id=self.request.user.id).values_list(
+                    'photo_id',
+                    flat=True
+                )
         ).order_by('-created_time')
 
 

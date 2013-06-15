@@ -49,7 +49,7 @@ class Vote(models.Model):
         # update vote count for a photo
         Photo.objects.filter(photo_id=self.photo_id).update(
             vote_count=Vote.objects.filter(photo=self.photo).aggregate(
-            vote_count=models.Sum('rating'))['vote_count']
+                vote_count=models.Sum('rating'))['vote_count']
         )
 
     def __unicode__(self):
