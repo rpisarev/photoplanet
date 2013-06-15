@@ -36,8 +36,9 @@
             likes: {{ p.like_count }}, votes: <span class="js-vote-{{ p.pk }}">{{ p.vote_count }}</span>
             </div>
 	    <div class="voting">
-                          <a href="#" class="js-vote" data-vote="1" data-id="{{ p.pk }}">up</a> |
-                          <a href="#" class="js-vote" data-vote="-1" data-id="{{ p.pk }}">down</a>
+                          <a href="#" class="js-vote" data-vote="+2" data-id="{{ p.pk }}">super! (+2)</a> |
+                          <a href="#" class="js-vote" data-vote="1" data-id="{{ p.pk }}">up (+1)</a> |
+                          <a href="#" class="js-vote" data-vote="-1" data-id="{{ p.pk }}">down (-1)</a>
              </div>
           </div>
         </div>
