@@ -1,5 +1,5 @@
 # https://docs.djangoproject.com/en/1.5/howto/custom-management-commands/
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.conf import settings
 from django.utils.timezone import utc
 
