@@ -1,5 +1,5 @@
 ToDo
-1. VK
+1. Vote
 2. Migration to Postgress
 3. JS
 4. Alert not loged
